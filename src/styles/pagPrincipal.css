@@ -1,0 +1,55 @@
+:root {
+    --texto-fuente: 'Helvetica';
+}
+
+.sec-principal {
+    /*Imagen de Drazen Zigic en Freepik */
+    background-image: url(../../public/images/section-principal.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 85vh;
+    display: grid;
+    place-content: center;
+}
+
+.titulo-section-principal {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: var(--texto-fuente);
+    color: rgb(0, 0, 0);
+}
+
+.titulo-section {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: var(--texto-fuente);
+    color: rgb(255, 255, 255);
+}
+
+.parrafo-section {
+    font-weight: bold;
+    font-family: var(--texto-fuente);
+    text-align: center;
+    width: 70%;
+}
+
+.sec-sobre-nosotros {
+    background-color: #5a2d8c;
+}
+.sec-eventos{
+    background-color: #000000ed;
+}
+.sec-ptos{
+    background-color: #5A2D8C;
+}
+.sec-premios{
+    background-color: #000000ed;
+}
+.ct {
+    color: rgb(255, 255, 255);
+    padding-top: 2%;
+    padding-bottom: 2%;
+    display: grid;
+    place-items: center;
+}
