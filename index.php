@@ -1,3 +1,8 @@
+<?php
+include("./server/config/conexionBD.php");
+
+conexionBaseDatos();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
