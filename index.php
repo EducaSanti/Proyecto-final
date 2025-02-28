@@ -12,19 +12,19 @@ conexionBaseDatos();
   <link rel="shortcut icon" href="./public/icons/icono.ico" type="image/x-icon">
   <link rel="stylesheet" href="./src/styles/pagPrincipal.css">
   <link rel="stylesheet" href="./public/bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-  <title>Inicio-Firestage</title>
+  <title>Inicio - Firestage</title>
 </head>
 
 <body>
   <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #FFFF;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="../../index.php">
         <img src="./public/icons/logo.png" alt="logo" width="300">
       </a>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link" href="#">INICIO</a>
+            <a class="nav-link" href="../../index.php">INICIO</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">ABOUT</a>
@@ -73,6 +73,9 @@ conexionBaseDatos();
       </h1>
     </section>
   </main>
+  <footer class="bg-white text-black text-center py-3">
+    © 2025 FireStage - Todos los derechos reservados
+  </footer>
   <script src="./public/bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

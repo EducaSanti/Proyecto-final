@@ -11,10 +11,7 @@ function conexionBaseDatos()
 
     if ($conn->connect_error) {
         die("Conexión Fallida: " . $conn->connect_error);
-    }else{
-        echo "Conexión exitosa";
     }
-
     return $conn;
 }
 

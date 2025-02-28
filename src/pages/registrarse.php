@@ -9,8 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="../../public/icons/icono.ico" type="image/x-icon">
   <link rel="stylesheet" href="../../public/bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../styles/login.css">
-  <title>IniciarSesión - Firestage</title>
+  <link rel="stylesheet" href="../styles/registro.css">
+  <title>Registrarse - Firestage</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -47,28 +47,38 @@
     </div>
   </nav>
   <main class="container flex-grow-1 d-flex justify-content-center align-items-center">
-    <!-- From Uiverse.io by glisovic01 -->
-    <div class="login-box">
-      <p>Iniciar Sesión</p>
-      <form>
-        <div class="user-box">
-          <input required="" name="" type="text">
-          <label>Email</label>
-        </div>
-        <div class="user-box">
-          <input required="" name="" type="password">
-          <label>Contraseña</label>
-        </div>
-        <a href="#">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Enviar
-        </a>
-      </form>
-      <p>¿No tienes una cuenta? <a href="./registrarse.php" class="a2">Registrate!</a></p>
-    </div>
+    <!-- From Uiverse.io by ammarsaa -->
+    <form class="form" action="../../server/controllers/anadirRegistro.php" method="post">
+      <p class="title">Registrarse </p>
+      <p class="message">Regístrate ahora y obtén acceso completo a nuestra aplicación.</p>
+      <div class="flex">
+        <label>
+          <input class="input" type="text" name="nombre" placeholder="" required="">
+          <span>Nombre</span>
+        </label>
+
+        <label>
+          <input class="input" type="text" name="apellidos" placeholder="" required="">
+          <span>Apellidos</span>
+        </label>
+      </div>
+
+      <label>
+        <input class="input" type="email" name="email" placeholder="" required="">
+        <span>Email</span>
+      </label>
+
+      <label>
+        <input class="input" type="password" name="contrasena" placeholder="" required="">
+        <span>Contraseña</span>
+      </label>
+      <label>
+        <input class="input" type="password" placeholder="" required="">
+        <span>Confirmar contraseña</span>
+      </label>
+      <button class="submit">Enviar</button>
+      <p class="signin">¿Ya tienes una cuenta? <a href="./login.php">Iniciar sesión</a> </p>
+    </form>
   </main>
 
   <footer class="bg-white text-black text-center py-3">
