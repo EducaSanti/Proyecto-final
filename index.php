@@ -39,6 +39,9 @@ conexionBaseDatos();
             <a class="nav-link" href="#">EVENTOS</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="./src/pages/login.php">HAZTE SOCIO</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#">CONTACTO</a>
           </li>
           <li class="nav-item">
