@@ -50,7 +50,7 @@
     <!-- From Uiverse.io by glisovic01 -->
     <div class="login-box">
       <p>Iniciar Sesión</p>
-      <form>
+      <form action="../../server/controllers/autorizarInicioSesion.php" method="post" >
         <div class="user-box">
           <input required="" name="" type="text">
           <label>Email</label>
