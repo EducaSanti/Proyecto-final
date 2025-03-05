@@ -32,25 +32,8 @@ function crear_usuarios($nombre, $apellidos, $email, $contrasena){
     }
 }
 
-
-function revisar_email($email){
-    $email = comprobar_datos($email);
-
-    $conn = conexionBaseDatos();
-
-    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email=?");
-    $stmt->bind_param("s", $email);
-
-    $result = $stmt->fetch();
-
-    if(isset($result['email'])){
-        return true;
-    }else{
-        return false;
-    }
-}
-
 if(isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['email']) &&  isset($_POST['contrasena'])){
     crear_usuarios($_POST['nombre'], $_POST['apellidos'], $_POST['email'], $_POST['contrasena']);
 }
+
 ?>
