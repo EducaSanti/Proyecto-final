@@ -18,10 +18,10 @@ function revisar_email($email){
 
     $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email=?");
     $stmt->bind_param("s", $email);
-
+    $stmt->execute();
     $result = $stmt->fetch();
 
-    if(isset($result['email'])){
+    if(isset($email)){
         return true;
     }else{
         return false;
@@ -37,8 +37,7 @@ function obtener_contrasena($email){
     $stmt->bind_param("s", $email);
 
     $result = $stmt->fetch();
-
-    return $result['contrasena'];
+    return $result['contraseña'];
 }
 
 function autorizacion($email,$password){

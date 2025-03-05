@@ -50,16 +50,16 @@
     <!-- From Uiverse.io by glisovic01 -->
     <div class="login-box">
       <p>Iniciar Sesión</p>
-      <form action="../../server/controllers/autorizarInicioSesion.php" method="post" >
+      <form id="miFormulario" action="../../server/controllers/autorizarInicioSesion.php" method="post">
         <div class="user-box">
-          <input required="" name="" type="text">
+          <input required="" name="email" type="text">
           <label>Email</label>
         </div>
         <div class="user-box">
-          <input required="" name="" type="password">
+          <input required="" name="contrasena" type="password">
           <label>Contraseña</label>
         </div>
-        <a href="#">
+        <a href="#" onclick="enviarFormulario()">
           <span></span>
           <span></span>
           <span></span>
@@ -75,4 +75,10 @@
     © 2025 FireStage - Todos los derechos reservados
   </footer>
   <script src="./public/bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function enviarFormulario() {
+      document.getElementById("miFormulario").submit();
+    }
+  </script>
+
 </html>
