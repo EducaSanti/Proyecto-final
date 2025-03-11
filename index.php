@@ -37,13 +37,16 @@
             <a class="nav-link" href="#">EVENTOS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./src/pages/login.php">HAZTE SOCIO</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#">CONTACTO</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">SOPORTE</a>
+          </li>
+        </ul>
+        <ul class="d-flex">
+          <li class="nav-item">
+            <a class="nav-link" href="./src/pages/login.php">INICIAR SESIÓN</a>
+            <a class="nav-link" href="./server/controllers/cerrarSession.php">CERRAR SESIÓN</a>
           </li>
         </ul>
       </div>
@@ -51,7 +54,7 @@
   </nav>
   <main>
     <section class="sec-principal">
-      <h1  class="titulo-section-principal">UNA EXPERIENCIA INOLVIDABLE</h1>
+      <h1 class="titulo-section-principal">UNA EXPERIENCIA INOLVIDABLE</h1>
     </section>
     <section class="ct sec-sobre-nosotros">
       <h1 class="titulo-section">

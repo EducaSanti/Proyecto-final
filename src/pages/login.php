@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +47,7 @@
     <!-- From Uiverse.io by glisovic01 -->
     <div class="login-box">
       <p>Iniciar Sesión</p>
-      <form id="miFormulario" action="../../server/controllers/autorizarInicioSesion.php" method="post">
+      <form id="miFormulario">
         <div class="user-box">
           <input required="" name="email" type="text">
           <label>Email</label>
@@ -59,7 +56,7 @@
           <input required="" name="contrasena" type="password">
           <label>Contraseña</label>
         </div>
-        <a href="#" onclick="enviarFormulario()">
+        <a href="#" id="submitBtn" onclick="enviarFormulario()">
           <span></span>
           <span></span>
           <span></span>
@@ -69,15 +66,62 @@
       </form>
       <p>¿No tienes una cuenta? <a href="./registrarse.php" class="a2">Registrate!</a></p>
     </div>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">INICIAR SESIÓN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="mensaje-modal"></p>
+        </div>
+      </div>
+    </div>
+    </div>
   </main>
 
   <footer class="bg-white text-black text-center py-3">
     © 2025 FireStage - Todos los derechos reservados
   </footer>
-  <script src="./public/bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../public/bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function enviarFormulario() {
-      document.getElementById("miFormulario").submit();
+      // Petición AJAX
+      const form = document.getElementById('miFormulario');
+      const msjModal = document.getElementById('mensaje-modal'); 
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.textContent = 'Enviando...'; // Feedback visual
+
+      const formData = new FormData(form);
+
+      fetch('../../server/controllers/autorizarInicioSesion.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            /*
+            Tipos de data
+                'success'
+                'message'
+                'max_intentos' 
+                'intentos'
+                'redirect'    
+            */
+          } else {
+            // Opcional: Mostrar mensaje de error
+            alert('Credenciales incorrectas. Intento ' + data.intentos + ' de 3');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Ocurrió un error al procesar la solicitud');
+        })
+        .finally(() => {
+          submitBtn.textContent = 'Enviar';
+        });
+
     }
   </script>
 

@@ -1,6 +1,17 @@
 <?php
 include("../../server/config/conexionBD.php");
+// Establecer el encabezado para indicar que la respuesta es JSON
+header('Content-Type: application/json');
+session_start();
 
+//SIIN FUNCIONALIDAD
+function comprobarIntentos(){
+    if(!isset($_SESSION["INTENTOS"])){
+        $_SESSION["INTENTOS"] = 0;
+    }else{
+        $_SESSION["INTENTOS"] ++;
+    }
+}
 
 function comprobar_datos($datos){
     // Elimina los espacios tanto al final como al principio y las comillas simples
@@ -36,8 +47,10 @@ function obtener_contrasena($email){
     $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email=?");
     $stmt->bind_param("s", $email);
 
-    $result = $stmt->fetch();
-    return $result['contraseña'];
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['contraseña'] ?? null;
 }
 
 function autorizacion($email,$password){
@@ -52,13 +65,52 @@ function autorizacion($email,$password){
     }
 }
 
+// Respuesta por defecto
+$response = [
+    'success' => false,
+    'message' => 'Error desconocido',
+    'intentos' => 0
+];
+
 if(isset($_POST['email']) &&  isset($_POST['contrasena'])){
-    $autorizar_usuario = autorizacion($_POST['email'], $_POST['contrasena']);
-    if($autorizar_usuario){
-        header('Location: ../../index.php');
-    } else {
-        header('HTTP/1.0 401 Unauthorized');
+    try {
+        $email = $_POST['email'];
+        $password = $_POST['contrasena'];
+        comprobarIntentos();
+
+        if ($_SESSION['INTENTOS'] >= 3) {
+            $response = [
+                'success' => false,
+                'message' => 'Has alcanzado el máximo de intentos',
+                'max_intentos' => true,
+                'intentos' => $_SESSION['INTENTOS']
+            ];
+
+        } elseif (autorizacion($email, $password)) {
+            $_SESSION['usuario_registrado'] = $email;
+            $response = [
+                'success' => true,
+                'redirect' => '../../index.php',
+                'message' => 'Inicio de sesión exitoso'
+            ];
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Credenciales incorrectas',
+                'intentos' => $_SESSION['INTENTOS']
+            ];
+        }
+    } catch (Exception $e) {
+        $response = [
+            'success' => false,
+            'message' => 'Error del servidor: ' . $e->getMessage(),
+            'intentos' => isset($_SESSION['INTENTOS']) ? $_SESSION['INTENTOS'] : 0
+        ];
     }
 }
+
+// Devolver la respuesta como JSON
+echo json_encode($response);
+exit;
 
 ?>
