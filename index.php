@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="./public/icons/icono.ico" type="image/x-icon">
-  <link rel="stylesheet" href="./src/styles/pagPrincipal.css">
+  <link rel="stylesheet" href="./src/styles/index.css">
   <link rel="stylesheet" href="./public/bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.min.css">
   <title>Inicio - Firestage</title>
 </head>
@@ -20,7 +20,7 @@
         <img src="./public/icons/logo.png" alt="logo" width="300">
       </a>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="nav justify-content-end">
+        <ul class="nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" href="../../index.php">INICIO</a>
           </li>
@@ -43,7 +43,7 @@
             <a class="nav-link" href="#">SOPORTE</a>
           </li>
         </ul>
-        <ul class="d-flex">
+        <ul class="nav d-flex">
           <li class="nav-item">
             <a class="nav-link" href="./src/pages/login.php">INICIAR SESIÓN</a>
             <a class="nav-link" href="./server/controllers/cerrarSession.php">CERRAR SESIÓN</a>

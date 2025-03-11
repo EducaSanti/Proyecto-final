@@ -93,6 +93,7 @@ if(isset($_POST['email']) &&  isset($_POST['contrasena'])){
                 'redirect' => '../../index.php',
                 'message' => 'Inicio de sesión exitoso'
             ];
+            $_SESSION['usuario_registrado'] = $email;
         } else {
             $response = [
                 'success' => false,

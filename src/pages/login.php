@@ -11,13 +11,13 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-  <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #FFFF;">
+<nav class="navbar fixed-top navbar-expand-lg" style="background-color: #FFFF;">
     <div class="container-fluid">
       <a class="navbar-brand" href="../../index.php">
         <img src="../../public/icons/logo.png" alt="logo" width="300">
       </a>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="nav justify-content-end">
+        <ul class="nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" href="../../index.php">INICIO</a>
           </li>
@@ -38,6 +38,12 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">SOPORTE</a>
+          </li>
+        </ul>
+        <ul class="nav d-flex">
+          <li class="nav-item">
+            <a class="nav-link" href="./src/pages/login.php">INICIAR SESIÓN</a>
+            <a class="nav-link" href="./server/controllers/cerrarSession.php">CERRAR SESIÓN</a>
           </li>
         </ul>
       </div>
@@ -66,14 +72,16 @@
       </form>
       <p>¿No tienes una cuenta? <a href="./registrarse.php" class="a2">Registrate!</a></p>
     </div>
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">INICIAR SESIÓN</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p id="mensaje-modal"></p>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">INICIAR SESIÓN</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="mensaje-modal"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -88,7 +96,8 @@
     function enviarFormulario() {
       // Petición AJAX
       const form = document.getElementById('miFormulario');
-      const msjModal = document.getElementById('mensaje-modal'); 
+      const modal = new bootstrap.Modal(document.getElementById('loginModal'))
+      const msjModal = document.getElementById('mensaje-modal');
       const submitBtn = document.getElementById('submitBtn');
       submitBtn.textContent = 'Enviando...'; // Feedback visual
 
@@ -109,14 +118,23 @@
                 'intentos'
                 'redirect'    
             */
+            msjModal.textContent = data.message;
+            modal.show();
+            window.location.href = data.redirect;
+          } else if (data.max_intentos) {
+            // Mostrar el modal cuando se alcanzan los intentos máximos
+            msjModal.textContent = 'Has alcanzado el máximo de intentos. Por favor, espera o contacte con soporte.';
+            modal.show();
           } else {
             // Opcional: Mostrar mensaje de error
-            alert('Credenciales incorrectas. Intento ' + data.intentos + ' de 3');
+            msjModal.textContent = data.message + '. Intento ' + data.intentos + ' de 3.';
+            modal.show();
           }
         })
         .catch(error => {
           console.error('Error:', error);
-          alert('Ocurrió un error al procesar la solicitud');
+          msjModal.textContent = 'Ocurrió un error al procesar la solicitud.';
+          modal.show();
         })
         .finally(() => {
           submitBtn.textContent = 'Enviar';
