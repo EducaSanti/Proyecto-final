@@ -11,7 +11,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-<nav class="navbar fixed-top navbar-expand-lg" style="background-color: #FFFF;">
+  <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #FFFF;">
     <div class="container-fluid">
       <a class="navbar-brand" href="../../index.php">
         <img src="../../public/icons/logo.png" alt="logo" width="300">
@@ -42,8 +42,7 @@
         </ul>
         <ul class="nav d-flex">
           <li class="nav-item">
-            <a class="nav-link" href="./src/pages/login.php">INICIAR SESIÓN</a>
-            <a class="nav-link" href="./server/controllers/cerrarSession.php">CERRAR SESIÓN</a>
+            <a class="nav-link" href="../../server/controllers/cerrarSession.php">CERRAR SESIÓN</a>
           </li>
         </ul>
       </div>
@@ -101,6 +100,7 @@
       const submitBtn = document.getElementById('submitBtn');
       submitBtn.textContent = 'Enviando...'; // Feedback visual
 
+      // Para enviar datos de formulario usando fetch(), automáticamente captura todos los campos de entrada del formulario
       const formData = new FormData(form);
 
       fetch('../../server/controllers/autorizarInicioSesion.php', {
@@ -120,7 +120,12 @@
             */
             msjModal.textContent = data.message;
             modal.show();
-            window.location.href = data.redirect;
+            // Cuando el modal se ha ocultado completamente
+            if(data.redirect){
+              document.getElementById('loginModal').addEventListener('hidden.bs.modal', () => {
+                window.location.href = data.redirect;
+              }, {once: true});
+            }
           } else if (data.max_intentos) {
             // Mostrar el modal cuando se alcanzan los intentos máximos
             msjModal.textContent = 'Has alcanzado el máximo de intentos. Por favor, espera o contacte con soporte.';
@@ -138,7 +143,9 @@
         })
         .finally(() => {
           submitBtn.textContent = 'Enviar';
+
         });
+
 
     }
   </script>

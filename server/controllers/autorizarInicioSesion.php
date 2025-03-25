@@ -53,6 +53,19 @@ function obtener_contrasena($email){
     return $row['contraseña'] ?? null;
 }
 
+function obtenerRol($email){
+    $email = comprobar_datos($email);
+
+    $conn = conexionBaseDatos();
+
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email=?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['rol'] ?? null;
+}
+
 function autorizacion($email,$password){
     $email = comprobar_datos($email);
     $password = comprobar_datos($password);
@@ -87,13 +100,14 @@ if(isset($_POST['email']) &&  isset($_POST['contrasena'])){
             ];
 
         } elseif (autorizacion($email, $password)) {
-            $_SESSION['usuario_registrado'] = $email;
+            $rol = obtenerRol($email);
             $response = [
                 'success' => true,
                 'redirect' => '../../index.php',
                 'message' => 'Inicio de sesión exitoso'
             ];
-            $_SESSION['usuario_registrado'] = $email;
+            $_SESSION['usuario_registrado'][$rol]= $email;
+            
         } else {
             $response = [
                 'success' => false,
